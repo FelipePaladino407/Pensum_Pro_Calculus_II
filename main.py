@@ -65,7 +65,7 @@ def trapezoide(a, b, fun, n):
 # Para verificar que el algoritmo produce resultados correctos, evaluamos un integral definida conocida y comparamos con respecto al valor verdadero conocida. En este caso calculamos:
 #        \int_0_{\pi/4} \cos(x)dx = 1/sqrt(2)
 
-def funcion_de_prueba(x):
+def f(x):
     """
     Definición de una función de argumento x
 
@@ -75,36 +75,32 @@ def funcion_de_prueba(x):
     Resultado obtenido:
         Imagen de la función en x 
     """
-    return np.cos(x)
+    return np.cos(np.sqrt(x))
 
-# Valor verdadero de la integral definida
-Valor_verdadero_integral = 1/np.sqrt(2)
+def L_f(x):
+    """
+    Derivada de f respecto a x
+    Integrando de la función longitud de arco
+    """
+    return np.sqrt( 1 + (-1*np.sin(np.sqrt(x))*1/(2*np.sqrt(x)))**2)
 
-# Aproximación con 10 subintervalos
-n1 = 10
-n2 = 100
+# Valor verdadero de la longitud de arco de f entre 1 y 5 
+Valor_verdadero_integral = 4.17293704556202 
+subintervalos = [2, 4, 8, 10, 20, 40, 80, 100, 1000]
+a = 1
+b = 5
 
-a1 = puntoMedio(0,np.pi/4,funcion_de_prueba,n1)
-# Error relativo de la aproximación
-Error_a1 = np.abs(a1-Valor_verdadero_integral)/np.abs(Valor_verdadero_integral)
+print("Método: Punto Medio")
+print("-------------------------------\n")
+for i in subintervalos:
+    pm = puntoMedio(a,b,L_f,i) 
+    err = np.abs(pm-Valor_verdadero_integral)/np.abs(Valor_verdadero_integral)
+    print(f"Valor aproximado: {pm:.8e}; Error realavito: {err:.8e} con {i} subintervalos\n")
 
-a2 = puntoMedio(0,np.pi/4,funcion_de_prueba,n2) 
-Error_a2 = np.abs(a2-Valor_verdadero_integral)/np.abs(Valor_verdadero_integral)
-
-print(f"""
-      Mediante Punto Medio:\n
-Valor aproximado: {a1:.8e}; Error realavito: {Error_a1:.8e} con {n1} subintervalos\n
-Valor aproximado: {a2:.8e}; Error realavito: {Error_a2:.8e} con {n2} subintervalos\n
-""")
-a1 = trapezoide(0,np.pi/4,funcion_de_prueba,n1)
-Error_a1 = np.abs(a1-Valor_verdadero_integral)/np.abs(Valor_verdadero_integral)
-
-a2 = trapezoide(0,np.pi/4,funcion_de_prueba,n2) 
-Error_a2 = np.abs(a2-Valor_verdadero_integral)/np.abs(Valor_verdadero_integral)
-
-print(f"""
-      Mediante Trapezoide:\n
-Valor aproximado: {a1:.8e}; Error realavito: {Error_a1:.8e} con {n1} subintervalos\n
-Valor aproximado: {a2:.8e}; Error realavito: {Error_a2:.8e} con {n2} subintervalos\n
-""")
-# Confome el número de subintervalos aumenta el Error relativo de la aproximación disminuye
+print("-------------------------------\n")
+print("Método: Trapezoide")
+print("-------------------------------\n")
+for i in subintervalos:
+    tr = trapezoide(a,b,L_f,i) 
+    err = np.abs(tr-Valor_verdadero_integral)/np.abs(Valor_verdadero_integral)
+    print(f"Valor aproximado: {tr:.8e}; Error realavito: {err:.8e} con {i} subintervalos\n")
