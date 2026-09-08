@@ -35,6 +35,43 @@ def puntoMedio(a,b,fun,n):
         x0 = x1
     return deltaX*aux
 
+# Funcion Homero Simpson
+def simpson(a, b, fun, n):
+    """
+    Aproxima una integral definida utilizando la Regla de Simpson.
+
+    Argumentos:
+        a: extremo inferior del intervalo
+        b: extremo superior del intervalo
+        fun: función a integrar
+        n: número de subintervalos
+
+    Retorna:
+        Valor aproximado de la integral definida.
+
+    Observaciones:
+        a < b
+        n debe ser par
+    """
+
+    if n % 2 != 0:
+        raise ValueError("Para utilizar la Regla de Simpson, n debe ser par.")
+
+    deltaX = (b-a)/n
+
+    suma = fun(a) + fun(b)
+
+    for i in range(1, n):
+        x_i = a + i*deltaX
+
+        if i % 2 == 0:
+            suma += 2*fun(x_i)
+        else:
+            suma += 4*fun(x_i)
+
+    return (deltaX/3)*suma
+
+# Trapezoide
 def trapezoide(a, b, fun, n):
     """
     Argumentos:
@@ -104,3 +141,21 @@ for i in subintervalos:
     tr = trapezoide(a,b,L_f,i) 
     err = np.abs(tr-Valor_verdadero_integral)/np.abs(Valor_verdadero_integral)
     print(f"Valor aproximado: {tr:.8e}; Error realavito: {err:.8e} con {i} subintervalos\n")
+
+print("-------------------------------\n")
+print("Método: Bart Simpson")
+print("-------------------------------\n")
+
+for pp in subintervalos:
+    sp = simpson(a, b, L_f, pp)
+    
+    # calculo del infimo error relativo
+    err = np.abs(
+        sp-Valor_verdadero_integral
+    ) / np.abs(Valor_verdadero_integral)
+
+    print(
+        f"Valor aproximado: {sp:.8e}; "
+        f"Error relativo: {err:.8e} "
+        f"con {pp} subintervalos\n"
+    )
