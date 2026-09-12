@@ -1,11 +1,10 @@
 """  
 autores: 
     José-Job Flores Godoy (punto medio)
-    Felipe Ernesto Paladino Choza 
-    Santiago Osvaldo Blanco Canaparro
+    Felipe Paladino 
+    Santiago Blanc
 
-Este programa es un tributo al físico japonés Pierre de Fermat (1933-2012), y al 
-operario de caja registradora Sebastián Torres (1982-2025)
+Este programa es un tributo al matemático Pierre de Fermat (1601-1665)
 """
 
 import numpy as np
@@ -132,7 +131,7 @@ print("-------------------------------\n")
 for i in subintervalos:
     pm = puntoMedio(a,b,L_f,i) 
     err = np.abs(pm-Valor_verdadero_integral)/np.abs(Valor_verdadero_integral)
-    print(f"Valor aproximado: {pm:.8e}; Error realavito: {err:.8e} con {i} subintervalos\n")
+    print(f"Valor aproximado: {pm:.8e}; Error relativo: {err:.8e} con {i} subintervalos\n")
 
 print("-------------------------------\n")
 print("Método: Trapezoide")
@@ -140,7 +139,7 @@ print("-------------------------------\n")
 for i in subintervalos:
     tr = trapezoide(a,b,L_f,i) 
     err = np.abs(tr-Valor_verdadero_integral)/np.abs(Valor_verdadero_integral)
-    print(f"Valor aproximado: {tr:.8e}; Error realavito: {err:.8e} con {i} subintervalos\n")
+    print(f"Valor aproximado: {tr:.8e}; Error relativo: {err:.8e} con {i} subintervalos\n")
 
 print("-------------------------------\n")
 print("Método: Bart Simpson")
