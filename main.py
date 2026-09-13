@@ -140,7 +140,7 @@ for i in subintervalos:
     print(f"Valor aproximado: {tr:.8e}; Error realavito: {err:.8e} con {i} subintervalos\n")
 
 print("-------------------------------\n")
-print("Método: Bart Simpson")
+print("Método: Simpson")
 print("-------------------------------\n")
 
 for pp in subintervalos:
