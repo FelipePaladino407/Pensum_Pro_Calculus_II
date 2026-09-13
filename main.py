@@ -1,10 +1,8 @@
 """  
 autores: 
     José-Job Flores Godoy (punto medio)
-    Felipe Paladino 
-    Santiago Blanc
-
-Este programa es un tributo al matemático Pierre de Fermat (1601-1665)
+    Felipe Martin Paladino Sosa 
+    Santiago Osvaldo Blanco Canaparro
 """
 
 import numpy as np
@@ -34,7 +32,7 @@ def puntoMedio(a,b,fun,n):
         x0 = x1
     return deltaX*aux
 
-# Funcion Homero Simpson
+# Regla de simpson 
 def simpson(a, b, fun, n):
     """
     Aproxima una integral definida utilizando la Regla de Simpson.
@@ -115,8 +113,8 @@ def f(x):
 
 def L_f(x):
     """
-    Derivada de f respecto a x
     Integrando de la función longitud de arco
+    para f(x) = cos(sqrt(x)).
     """
     return np.sqrt( 1 + (-1*np.sin(np.sqrt(x))*1/(2*np.sqrt(x)))**2)
 
@@ -142,13 +140,13 @@ for i in subintervalos:
     print(f"Valor aproximado: {tr:.8e}; Error relativo: {err:.8e} con {i} subintervalos\n")
 
 print("-------------------------------\n")
-print("Método: Bart Simpson")
+print("Método: Simpson")
 print("-------------------------------\n")
 
 for pp in subintervalos:
     sp = simpson(a, b, L_f, pp)
     
-    # calculo del infimo error relativo
+    # calculo del error relativo
     err = np.abs(
         sp-Valor_verdadero_integral
     ) / np.abs(Valor_verdadero_integral)
